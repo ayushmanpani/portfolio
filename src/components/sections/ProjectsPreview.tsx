@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import Container from "../ui/Container";
 import Section from "../ui/Section";
-import Card from "../ui/Section";
+import Card from "../ui/Card";
 import { projects } from "../../data/projects";
-
+import { Link } from "react-router-dom";
 
 const ProjectsPreview = () => {
   return (
-    <Section className="pt-20">
+    <Section className="pt-20 border-t border-border">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -18,10 +18,6 @@ const ProjectsPreview = () => {
         >
           {/* Header */}
           <div className="max-w-3xl space-y-4">
-            <span className="text-sm uppercase tracking-wider text-accent font-medium">
-              {/* Selected Work */}
-            </span>
-
             <h2 className="text-3xl md:text-4xl font-bold">
               Featured Projects
             </h2>
@@ -33,12 +29,12 @@ const ProjectsPreview = () => {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {projects
               .filter((p) => p.featured)
               .map((project) => (
                 <Card
-                  key={project.id}
+                  key={project.slug}
                   className="space-y-4 hover:-translate-y-1 transition-transform duration-300"
                 >
                   <h3 className="text-lg font-semibold">
@@ -46,10 +42,10 @@ const ProjectsPreview = () => {
                   </h3>
 
                   <p className="text-muted text-sm">
-                    {project.shortDescription}
+                    {project.teaser}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 text-xs">
+                  {/* <div className="flex flex-wrap gap-2 text-xs">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
@@ -58,18 +54,16 @@ const ProjectsPreview = () => {
                         {tech}
                       </span>
                     ))}
-                  </div>
+                  </div> */}
 
                   <div className="flex gap-4 pt-2 text-sm">
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        className="text-accent hover:underline"
-                      >
-                        Live →
-                      </a>
-                    )}
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      className="text-accent hover:underline"
+                    >
+                      Case Study →
+                    </Link>
+
                     {project.githubUrl && (
                       <a
                         href={project.githubUrl}
@@ -84,9 +78,20 @@ const ProjectsPreview = () => {
               ))}
           </div>
 
+          {/* View All */}
+          <div>
+            <Link
+              to="/projects"
+              className="text-sm text-accent hover:underline"
+            >
+              View All Projects →
+            </Link>
+          </div>
+
         </motion.div>
       </Container>
     </Section>
-  )};
+  );
+};
 
-  export default ProjectsPreview;
+export default ProjectsPreview;
