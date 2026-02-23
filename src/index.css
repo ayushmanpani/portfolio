@@ -5,45 +5,40 @@
 /* ===== Theme Variables ===== */
 
 :root {
-  --color-bg: #f5f7fa;
-  --color-card: #ffffff;
-  --color-text: #0b1220;
+  --color-bg: #f4f6f8;        /* neutral cool gray */
+  --color-surface: #ffffff;   /* cards */
+  --color-text: #0f172a;
   --color-muted: #475569;
-  --color-accent: #1d4ed8;   /* deeper blue */
-  --color-border: #dbe2ea;
+  --color-accent: #2563eb;
+  --color-border: #e2e8f0;
 
-  --color-bg-gradient: linear-gradient(
-    to bottom,
-    #f5f7fa,
-    #eef2f6
-  );
+  --color-section-alt: #eef2f6; /* subtle contrast */
+  --color-grid: rgba(15,23,42,0.22);
 }
 
 
 
 
 .dark {
-  --color-bg: #0a0f1c;
-  --color-card: #0f172a;
-  --color-text: #e2e8f0;
+  --color-bg: #0f172a;        /* slate 900 */
+  --color-surface: #1e293b;   /* slate 800 */
+  --color-text: #f1f5f9;
   --color-muted: #94a3b8;
   --color-accent: #3b82f6;
-  --color-border: #1f2937;
+  --color-border: #334155;
 
-  --color-bg-gradient: linear-gradient(
-    to bottom,
-    #0a0f1c,
-    #0f172a
-  );
+  --color-section-alt: #162033; /* subtle shift */
+  --color-grid: rgba(148,163,184,0.12);
 }
 
 
 
 
 body {
-  background: var(--color-bg-gradient);
+  background-color: var(--color-bg);
   @apply text-text transition-colors duration-300;
 }
+
 
 
 @keyframes floatSlow {
@@ -78,11 +73,27 @@ body::before {
 
 
 .section-alt {
-  background: #f8fafc;
+  background-color: var(--color-section-alt);
 }
-
 
 .dark .section-alt {
-  background: #111827;
+  background-color: var(--color-section-alt);
 }
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+@keyframes gridDrift {
+  from { transform: translate(0px, 0px); }
+  to   { transform: translate(-60px, -60px); }
+}
+
+.animate-grid-drift {
+  animation: gridDrift 24s linear infinite;
+}
+
 

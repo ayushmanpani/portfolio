@@ -36,32 +36,14 @@ const Hero = () => {
   return (
     <Section
       className="relative min-h-[80vh] flex items-center overflow-hidden border-b border-border"
-      onMouseMove={handleMouseMove}
     >
-
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div
-          className="absolute inset-0 blur-3xl"
-          style={{
-            background: `
-              radial-gradient(
-                350px circle at ${mousePosition.x}px ${mousePosition.y}px,
-                rgba(37, 99, 235, 0.18),
-                rgba(99, 102, 241, 0.12),
-                transparent 65%
-              )
-            `,
-          }}
-        />
-      </div>
 
       {/* Floating blob */}
       <div
         className="
-          absolute -top-32 -right-32 w-96 h-96 
+          absolute -top-32 -right-32 w-80 h-80 
           rounded-full blur-3xl 
-          opacity-30 dark:opacity-10
+          opacity-20 dark:opacity-10
           bg-blue-300 dark:bg-blue-500
           animate-float-slow
         "

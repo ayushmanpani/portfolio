@@ -7,6 +7,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import ProjectDetail from "./pages/ProjectDetail";
 import ScrollToTop from "./components/layout/ScrollToTop";
+import BackgroundLayer from "./components/layout/BackgroundLayer";
 
 
 
@@ -14,6 +15,7 @@ import ScrollToTop from "./components/layout/ScrollToTop";
 function App() {
   return (
     <BrowserRouter>
+      <BackgroundLayer />
       <Navbar />
       <ScrollToTop />
       <Routes>
