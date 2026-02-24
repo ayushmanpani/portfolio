@@ -2,11 +2,11 @@ import Container from "../ui/Container";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border mt-32 py-8">
+    <footer className="mt-24 border-t border-border">
       <Container>
-        <div className="flex flex-col md:flex-row justify-between text-sm text-muted">
-          <span>© 2026 Ayushman Pani</span>
-          <span>AI & Systems Engineer</span>
+        <div className="flex flex-col items-center justify-between py-8 text-sm md:flex-row text-muted">
+          <p>© {new Date().getFullYear()} Ayushman Pani</p>
+          <p>Built with React & Tailwind</p>
         </div>
       </Container>
     </footer>

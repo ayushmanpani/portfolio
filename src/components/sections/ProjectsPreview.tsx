@@ -18,30 +18,30 @@ const ProjectsPreview = () => {
         >
           {/* Header */}
           <div className="max-w-3xl space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold">
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
               Featured Projects
             </h2>
 
-            <p className="text-muted text-lg leading-relaxed">
+            <p className="text-lg leading-relaxed text-muted">
               A selection of systems designed with real-world constraints,
               monitoring, and scalability in mind.
             </p>
           </div>
 
           {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid gap-8 md:grid-cols-2">
             {projects
               .filter((p) => p.featured)
               .map((project) => (
                 <Card
                   key={project.slug}
-                  className="space-y-4 hover:-translate-y-1 transition-transform duration-300"
+                  className="space-y-4 transition-transform duration-300 hover:-translate-y-1"
                 >
                   <h3 className="text-lg font-semibold">
                     {project.title}
                   </h3>
 
-                  <p className="text-muted text-sm">
+                  <p className="text-sm text-muted">
                     {project.teaser}
                   </p>
 
@@ -49,7 +49,7 @@ const ProjectsPreview = () => {
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 bg-card border border-border rounded"
+                        className="px-2 py-1 border rounded bg-card border-border"
                       >
                         {tech}
                       </span>

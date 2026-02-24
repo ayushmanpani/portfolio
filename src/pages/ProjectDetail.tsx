@@ -2,6 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import Container from "../components/ui/Container";
 import Section from "../components/ui/Section";
+import ReactMarkdown from "react-markdown";
+
 
 const ProjectDetail = () => {
     const { slug } = useParams();
@@ -33,7 +35,7 @@ const ProjectDetail = () => {
 
                     {/* Overview */}
                     <div className="space-y-6">
-                        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+                        <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
                             {project.title}
                         </h1>
 
@@ -46,7 +48,7 @@ const ProjectDetail = () => {
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-6 text-sm pt-1">
+                    <div className="flex flex-wrap gap-6 pt-1 text-sm">
                         {project.githubUrl && (
                             <a
                                 href={project.githubUrl}
@@ -71,36 +73,78 @@ const ProjectDetail = () => {
 
                     {/* 01 Problem */}
                     {project.problem && (
-                        <div className="space-y-6 border-t border-border pt-16">
-                            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                        <div className="pt-16 space-y-6 border-t border-gray-400">
+                            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                                 01. Problem & Constraints
                             </h2>
-                            <p className="text-muted leading-7 whitespace-pre-line">
-                                {project.problem}
-                            </p>
+                            <div className="pl-6 space-y-6 leading-tight text-muted">
+                                <ReactMarkdown
+                                    components={{
+                                        h2: ({ node, ...props }) => (
+                                            <h2 className="mt-6 mb-1 text-lg font-semibold text-accent"
+                                                {...props} />
+                                        ),
+                                        ul: ({ node, ...props }) => (
+                                            <ul className="pl-6 space-y-1 list-disc " {...props} />
+                                        ),
+                                        li: ({ node, ...props }) => (
+                                            <li className=" text-muted" {...props} />
+                                        ),
+                                    }}
+                                >
+                                    {project.problem}
+
+                                </ReactMarkdown>
+                            </div>
                         </div>
                     )}
 
                     {/* 02 Architecture */}
                     {(project.architecture || project.diagram) && (
-                        <div className="space-y-8 border-t border-border pt-16">
-                            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                        <div className="pt-16 space-y-6 border-t-2 border-gray-400">
+                            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                                 02. System Architecture
                             </h2>
 
                             {project.architecture && (
-                                <p className="text-muted leading-7 whitespace-pre-line">
-                                    {project.architecture}
-                                </p>
+                                < div className="pl-6 space-y-6 leading-tight text-muted">
+                                    <ReactMarkdown
+                                        components={{
+                                            h2: ({ node, ...props }) => (
+                                                <h2 className="mt-6 mb-1 text-lg font-semibold text-accent"
+                                                    {...props} />
+                                            ),
+                                            ul: ({ node, ...props }) => (
+                                                <ul className="pl-6 space-y-1 list-disc " {...props} />
+                                            ),
+                                            li: ({ node, ...props }) => (
+                                                <li className=" text-muted" {...props} />
+                                            ),
+                                        }}
+                                    >
+                                        {project.architecture}
+                                    </ReactMarkdown>
+                                </div>
+
                             )}
 
                             {project.diagram && (
-                                <div className="mt-10 border border-border rounded-lg overflow-hidden">
-                                    <img
-                                        src={project.diagram}
-                                        alt={`${project.title} Architecture Diagram`}
-                                        className="w-full object-cover transition-transform duration-300 hover:scale-105"
-                                    />
+                                <div className="mt-10 overflow-hidden border rounded-lg border-border bg-card/40 backdrop-blur-sm">
+                                    <div className="flex items-center justify-center p-6">
+                                        <img
+                                            src={project.diagram}
+                                            alt={`${project.title} Architecture Diagram`}
+                                            className="max-h-[1200px] w-auto transition-transform duration-300 hover:scale-[1.02]"
+                                        />
+                                    </div>
+
+                                    {project.diagramCaption && (
+                                        <p className="mt-4 text-xs text-center text-muted">
+                                            {project.diagramCaption}
+                                        </p>
+                                    )}
+
+
                                 </div>
                             )}
                         </div>
@@ -108,18 +152,33 @@ const ProjectDetail = () => {
 
                     {/* 03 Implementation */}
                     {project.implementation && (
-                        <div className="space-y-6 border-t border-border pt-16">
-                            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                        <div className="pt-16 space-y-6 border-t-2 border-gray-400">
+                            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                                 03. Implementation Details
                             </h2>
-                            <p className="text-muted leading-7 whitespace-pre-line">
-                                {project.implementation}
-                            </p>
+                            < div className="pl-6 space-y-6 leading-7 text-muted">
+                                <ReactMarkdown
+                                    components={{
+                                        h2: ({ node, ...props }) => (
+                                            <h2 className="mt-6 mb-1 text-lg font-semibold text-accent"
+                                                {...props} />
+                                        ),
+                                        ul: ({ node, ...props }) => (
+                                            <ul className="pl-6 space-y-1 list-disc " {...props} />
+                                        ),
+                                        li: ({ node, ...props }) => (
+                                            <li className=" text-muted" {...props} />
+                                        ),
+                                    }}
+                                >
+                                    {project.implementation}
+                                </ReactMarkdown>
+                            </div>
                         </div>
                     )}
 
                     {project.screenshots && project.screenshots.length > 0 && (
-                        <div className="mt-12 space-y-6">
+                        <div className="max-w-5xl px-4 mx-auto mt-12 space-y-6">
 
                             <div
                                 className={`grid gap-6 ${project.screenshots.length === 1
@@ -133,13 +192,16 @@ const ProjectDetail = () => {
                                 {project.screenshots.slice(0, 4).map((img, index) => (
                                     <div
                                         key={index}
-                                        className="border border-border rounded-lg overflow-hidden bg-card"
+                                        className="overflow-hidden transition-all duration-300 border group rounded-xl border-border bg-card/60 backdrop-blur-sm hover:shadow-xl hover:-translate-y-1"
+
                                     >
                                         <div className="aspect-[16/9]">
+                                            <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/10 to-transparent group-hover:opacity-100" />
+
                                             <img
                                                 src={img}
                                                 alt={`${project.title} screenshot ${index + 1}`}
-                                                className="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
+                                                className="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
                                             />
                                         </div>
                                     </div>
@@ -150,65 +212,100 @@ const ProjectDetail = () => {
 
                     {/* 04 Technical Decisions */}
                     {project.decisions && (
-                        <div className="space-y-6 border-t border-border pt-16">
-                            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                        <div className="pt-16 space-y-6 border-t-2 border-gray-400">
+                            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                                 04. Technical Decisions
                             </h2>
-                            <p className="text-muted leading-7 whitespace-pre-line">
-                                {project.decisions}
-                            </p>
+                            < div className="pl-6 space-y-6 leading-tight text-muted">
+                                <ReactMarkdown
+                                    components={{
+                                        h2: ({ node, ...props }) => (
+                                            <h2 className="mt-6 mb-1 text-lg font-semibold text-accent"
+                                                {...props} />
+                                        ),
+                                        ul: ({ node, ...props }) => (
+                                            <ul className="pl-6 space-y-1 list-disc " {...props} />
+                                        ),
+                                        li: ({ node, ...props }) => (
+                                            <li className=" text-muted" {...props} />
+                                        ),
+                                    }}
+                                >
+                                    {project.decisions}
+                                </ReactMarkdown>
+                            </div>
                         </div>
                     )}
 
                     {/* 05 Metrics */}
                     {project.metrics && project.metrics.length > 0 && (
-                        <div className="space-y-12 border-t border-border pt-16">
-                            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                        <div className="pt-16 space-y-12 border-t-2 border-gray-400">
+                            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                                 05. Performance & Metrics
                             </h2>
 
-                            {project.metrics.map((table, index) => (
-                                <div key={index} className="space-y-6">
-                                    <h3 className="text-lg font-semibold">
-                                        {table.title}
-                                    </h3>
+                            <div className="pl-6">
+                                {project.metrics.map((section, index) => (
+                                    <div key={index} className="space-y-6">
+                                        {/* <h3 className="text-lg font-semibold">
+                                        {section.title}
+                                    </h3> */}
 
-                                    <div className="overflow-x-auto">
-                                        <table className="w-full text-sm border-collapse">
-                                            <thead>
-                                                <tr className="border-b border-border">
-                                                    {table.columns.map((col, i) => (
-                                                        <th
-                                                            key={i}
-                                                            className="text-left py-3 pr-6 font-medium text-muted"
-                                                        >
-                                                            {col}
-                                                        </th>
-                                                    ))}
-                                                </tr>
-                                            </thead>
+                                        {section.type === "structured" ? (
+                                            <div className="space-y-4 leading-6 text-muted">
+                                                <ReactMarkdown
+                                                    components={{
+                                                        ul: ({ ...props }) => (
+                                                            <ul className="pl-6 space-y-1 list-disc" {...props} />
+                                                        ),
+                                                        li: ({ ...props }) => (
+                                                            <li className="text-muted" {...props} />
+                                                        ),
+                                                        h2: ({ ...props }) => (
+                                                            <h4 className="mt-6 mb-2 font-semibold text-accent" {...props} />
+                                                        ),
+                                                    }}
+                                                >
+                                                    {section.content || ""}
+                                                </ReactMarkdown>
+                                            </div>
+                                        ) : (
+                                            <div className="overflow-x-auto">
+                                                <table className="w-full text-sm border-collapse">
+                                                    <thead>
+                                                        <tr className="border-b border-border">
+                                                            {section.columns?.map((col, i) => (
+                                                                <th
+                                                                    key={i}
+                                                                    className="py-3 pr-6 font-medium text-left text-muted"
+                                                                >
+                                                                    {col}
+                                                                </th>
+                                                            ))}
+                                                        </tr>
+                                                    </thead>
 
-                                            <tbody>
-                                                {table.rows.map((row, rIndex) => (
-                                                    <tr
-                                                        key={rIndex}
-                                                        className="border-b border-border"
-                                                    >
-                                                        {row.map((cell, cIndex) => (
-                                                            <td
-                                                                key={cIndex}
-                                                                className="py-3 pr-6 text-text"
-                                                            >
-                                                                {cell}
-                                                            </td>
+                                                    <tbody>
+                                                        {section.rows?.map((row, rIndex) => (
+                                                            <tr key={rIndex} className="border-b border-border">
+                                                                {row.map((cell, cIndex) => (
+                                                                    <td
+                                                                        key={cIndex}
+                                                                        className="py-3 pr-6 text-text"
+                                                                    >
+                                                                        {cell}
+                                                                    </td>
+                                                                ))}
+                                                            </tr>
                                                         ))}
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        )}
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
+
                         </div>
                     )}
 
@@ -216,21 +313,36 @@ const ProjectDetail = () => {
 
                     {/* 06 Challenges */}
                     {project.challenges && (
-                        <div className="space-y-6 border-t border-border pt-16">
-                            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                        <div className="pt-16 space-y-6 border-t-2 border-gray-400">
+                            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                                 06. Challenges & Learnings
                             </h2>
-                            <p className="text-muted leading-7 whitespace-pre-line">
-                                {project.challenges}
-                            </p>
+                            < div className="pl-6 space-y-6 leading-tight text-muted">
+                                <ReactMarkdown
+                                    components={{
+                                        h2: ({ node, ...props }) => (
+                                            <h2 className="mt-6 mb-1 text-lg font-semibold text-accent"
+                                                {...props} />
+                                        ),
+                                        ul: ({ node, ...props }) => (
+                                            <ul className="pl-6 space-y-1 list-disc " {...props} />
+                                        ),
+                                        li: ({ node, ...props }) => (
+                                            <li className=" text-muted" {...props} />
+                                        ),
+                                    }}
+                                >
+                                    {project.challenges}
+                                </ReactMarkdown>
+                            </div>
                         </div>
                     )}
 
-    
+
 
                 </div>
             </Container>
-        </Section>
+        </Section >
     );
 };
 

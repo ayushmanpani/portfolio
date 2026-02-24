@@ -7,7 +7,7 @@ const Navbar = () => {
   const { toggleTheme } = useTheme();
 
   return (
-    <nav className="border-b border-border bg-bg sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 border-b border-border bg-bg">
       <Container>
         <div className="flex items-center justify-between h-16">
           
@@ -19,19 +19,13 @@ const Navbar = () => {
           {/* Navigation Links */}
           <div className="flex items-center gap-6 text-sm font-medium">
             <Link to="/projects" className="relative group">
-              <span className="hover:text-accent transition-colors">
+              <span className="transition-colors hover:text-accent">
                 Projects
               </span>
               <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-500 ease-out group-hover:w-full"></span>
             </Link>
-            <Link to="/projects" className="relative group">
-              <span className="hover:text-accent transition-colors">
-                Blog
-              </span>
-              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-500 ease-out group-hover:w-full"></span>
-            </Link>
-            <Link to="/projects" className="relative group">
-              <span className="hover:text-accent transition-colors">
+            <Link to="/contact" className="relative group">
+              <span className="transition-colors hover:text-accent">
                 Contact
               </span>
               <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-500 ease-out group-hover:w-full"></span>

@@ -3,7 +3,7 @@ import Philosophy from "../components/sections/Philosophy";
 import ProjectsPreview from "../components/sections/ProjectsPreview";
 import Skills from "../components/sections/Skills";
 import Profiles from "../components/sections/Profiles";
-import ContactCTA from "../components/sections/ContactCTA";
+import Contact from "../components/sections/Contact";
 
 const Home = () => {
   return (
@@ -13,7 +13,7 @@ const Home = () => {
       <ProjectsPreview />
       <Skills />
       <Profiles />
-      <ContactCTA />
+      <Contact />
     </>
   );
 };
